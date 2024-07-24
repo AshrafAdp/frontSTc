@@ -1,0 +1,107 @@
+$base: #dadce8;
+$gray: #808080; // Define a gray color
+$ease: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+// Adjust these durations to control speed
+$animation-duration: 2s;
+$animation-duration-before: 2s;
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drop {
+  position: absolute;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%);
+  width: 25vmin; // Reduced default size
+  height: 25vmin; // Reduced default size
+  border-radius: 50%;
+  background: $gray; // Set background color to gray
+  filter: blur(1vmin);
+  box-shadow: -5vmin -5vmin 5vmin lighten($gray, 10%),
+              5vmin 5vmin 5vmin darken($gray, 10%),
+              inset -5vmin -5vmin 5vmin lighten($gray, 10%),
+              inset 5vmin 5vmin 5vmin darken($gray, 10%);
+  border: 0 solid $base;
+  animation: expand $animation-duration $ease infinite;
+  
+  @keyframes expand {
+    0% {
+      width: 0;
+      height: 0;
+      box-shadow: -5vmin -5vmin 5vmin lighten($gray, 10%),
+                  5vmin 5vmin 5vmin darken($gray, 10%),
+                  inset -5vmin -5vmin 5vmin lighten($gray, 10%),
+                  inset 5vmin 5vmin 5vmin darken($gray, 10%);
+      border: 0 solid transparentize($base, .5);
+    }
+    5% {
+      box-shadow: -5vmin -5vmin 5vmin lighten($gray, 10%),
+                  5vmin 5vmin 5vmin darken($gray, 10%),
+                  inset -5vmin -5vmin 5vmin lighten($gray, 10%),
+                  inset 5vmin 5vmin 5vmin darken($gray, 10%);
+      border: 2vmin solid transparentize($base, .5);
+    }
+    90% {
+      box-shadow: none;
+      border: 2vmin solid transparentize($base, .5);
+    }
+    100% {
+      width: 50vmin; // Adjusted to match reduced size
+      height: 50vmin; // Adjusted to match reduced size
+      box-shadow: none;
+      border: 0 solid transparentize($base, .5);
+    }
+  }
+  
+  &:before {
+    content: '';
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: 0%;
+    border-radius: 50%;
+    animation: expand1 $animation-duration-before $ease infinite;
+    background: $gray; // Set background color to gray
+    box-shadow: -5vmin -5vmin 5vmin lighten($gray, 10%),
+                5vmin 5vmin 5vmin darken($gray, 10%),
+                inset -5vmin -5vmin 5vmin lighten($gray, 10%),
+                inset 5vmin 5vmin 5vmin darken($gray, 10%);
+    
+    @keyframes expand1 {
+      0% {
+        width: 0%;
+        height: 0%;
+        background: $gray; // Set background color to gray
+        box-shadow: -5vmin -5vmin 5vmin lighten($gray, 10%),
+                    5vmin 5vmin 5vmin darken($gray, 10%),
+                    inset -5vmin -5vmin 5vmin lighten($gray, 10%),
+                    inset 5vmin 5vmin 5vmin darken($gray, 10%);
+        border: 0 solid $base;
+      }
+      20% {
+        box-shadow: -5vmin -5vmin 5vmin lighten($gray, 10%),
+                    5vmin 5vmin 5vmin darken($gray, 10%),
+                    inset -5vmin -5vmin 5vmin lighten($gray, 10%),
+                    inset 5vmin 5vmin 5vmin darken($gray, 10%);
+      }
+      100% {
+        width: 30%;
+        height: 30%;
+        background: $gray; // Set background color to gray
+        box-shadow: none;
+        border: 1vmin solid $base;
+      }
+    }
+  }
+}
